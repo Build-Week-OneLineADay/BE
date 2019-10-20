@@ -6,34 +6,35 @@ const db = require('../data/dbConfig.js');
 
 //export functions
 module.exports = {
-    find,
-    findByEmail, //login
-    findById, //   
-    add //register  
+    findAllUsers,
+    findUserByEmail, //login
+    findUserById, //   
+    addUser, //register  
+    findUserJournalEntries
 
 };
 
 //define CRUD methods
-function find(){
+function findAllUsers(){
 
     return db('users');
 }
 
-function findByEmail({ email }){
+function findUserByEmail({ email }){
 
     return db('users')
     .where({ 'users.email': email})
     .first();
 }
 
-function findById(id){
+function findUserById(id){
 
     return db('users')
     .where({ 'users.id': id })
     .first();    
 }
 
-function add({ first_name, last_name, email, password }){
+function addUser({ first_name, last_name, email, password }){
 
     return db('users')
     //'id' tells the db to return the id after insert. not necessary with sqlite3 but needed for postgres
@@ -42,5 +43,8 @@ function add({ first_name, last_name, email, password }){
         return findById(id);
     })
 }
+
+
+
 
 

@@ -12,6 +12,7 @@ const authDB = require('../users/userModel.js');
 const secrets = require ('../config/secrets.js');
 
 /**************************************endpoints beginning with /api/auth**************************************/
+//************api/auth/register
 authRouter.post('/register', (req, res) => {
 
      //destructure the info received from req.body
@@ -22,7 +23,7 @@ authRouter.post('/register', (req, res) => {
      //have the hash, know the algorithm used, and how many rounds were used to generate the hash in the first place.
      const hash = bcrypt.hashSync(password, 8);
  
-     authDB.add({ first_name, last_name, email, password: hash })
+     authDB.addUser({ first_name, last_name, email, password: hash })
      .then(user => {
 
         //send a token when the user registers so they can log in automatically
@@ -35,11 +36,12 @@ authRouter.post('/register', (req, res) => {
 
 })
 
+//***********api/auth/login
 authRouter.post('/login', (req, res) => {
 
     const { email, password } = req.body;    
 
-    authDB.findByEmail({ email })    
+    authDB.findUserByEmail({ email })    
     .then(user => {             
         //check that passwords match
         if(user && bcrypt.compareSync(password, user.password)){
@@ -71,6 +73,8 @@ authRouter.post('/login', (req, res) => {
         res.status(500).json({ error: 'There was an error signing the user into the database.'});
     })
 })
+
+
 
 //could be in a separate file
 function generateToken(user){
