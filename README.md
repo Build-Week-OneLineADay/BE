@@ -48,7 +48,7 @@
 
 ### Registers a New User
 
-**POST** to [/api/auth/register](https://bw-one-line-a-day.herokuapp.com/api/auth/register)
+**POST** to [https://backend-onelineaday.herokuapp.com/api/auth/register]
 
 Takes an object:
 
@@ -82,7 +82,7 @@ Takes an object:
 
 ### Login an Existing User
 
-**POST** to [/api/auth/login](https://bw-one-line-a-day.herokuapp.com/api/auth/login)
+**POST** to [https://backend-onelineaday.herokuapp.com/api/auth/login]
 
 Takes an object:
 
@@ -122,7 +122,7 @@ Takes an object:
 
 ### GET a List of All Users
 
-**GET** to [/api/users](https://bw-one-line-a-day.herokuapp.com/api/auth/register)
+**GET** to [https://backend-onelineaday.herokuapp.com/api/users]
 
 **Returns**: an array of user objects
 
@@ -178,7 +178,7 @@ Takes an object:
 
 ### GET a User By User Id
 
-**GET** to [/api/users](https://bw-one-line-a-day.herokuapp.com/api/auth/register)/id
+**GET** to [https://backend-onelineaday.herokuapp.com/api/users/1]
 
 **_*id in URL is user id_**
 
@@ -200,7 +200,7 @@ Takes an object:
 
 ### Update an Existing User
 
-**PUT** to [/api/users/id](https://bw-one-line-a-day.herokuapp.com/api/auth/register)
+**PUT** to [https://backend-onelineaday.herokuapp.com/api/users/1]
 
 **_*id in URL is user id_**
 
@@ -236,7 +236,7 @@ Takes an object:
 
 ### DELETE a User
 
-**DELETE** to [/api/users](https://bw-one-line-a-day.herokuapp.com/api/auth/register)/id
+**DELETE** to [https://backend-onelineaday.herokuapp.com/api/users/1]
 
 **_*id in URL is user id_**
 
@@ -252,7 +252,7 @@ Takes an object:
 
 ### GET all Posts/Journal Entries
 
-**GET** to [/api/journal/](https://bw-one-line-a-day.herokuapp.com/api/auth/register)posts
+**GET** to [https://backend-onelineaday.herokuapp.com/api/journal/posts]
 
 **Returns**: an array of post objects
 
@@ -336,7 +336,7 @@ Takes an object:
 
 ### GET a User’s Posts by User Id
 
-**GET** to [/api/journal/users](https://bw-one-line-a-day.herokuapp.com/api/auth/register)/id/posts
+**GET** to [https://backend-onelineaday.herokuapp.com/api/journal/users/1/posts]
 
 **_*id in URL is user id_**
 
@@ -372,7 +372,7 @@ Takes an object:
 
 ### GET a Post by Post Id
 
-**GET** to [/api/journal/posts/id](https://bw-one-line-a-day.herokuapp.com/api/auth/register)
+**GET** to [https://backend-onelineaday.herokuapp.com/api/journal/posts/1]
 
 **_*id in URL is post id_**
 
@@ -392,7 +392,7 @@ Takes an object:
 
 ### GET a Post by User Id & Post Date
 
-**GET** to [/api/journal/users/id/posts/](https://bw-one-line-a-day.herokuapp.com/api/auth/register)date
+**GET** to [https://backend-onelineaday.herokuapp.com/api/journal/users/1/posts/10-21-2019]
 
 **_*id in URL is user id_**
 
@@ -436,7 +436,7 @@ Takes an object:
 
 ### Create a New Journal Entry/Post
 
-**POST** to [/api/journal/users/id/posts](https://bw-one-line-a-day.herokuapp.com/api/auth/register)
+**POST** to [https://backend-onelineaday.herokuapp.com/api/journal/users/1/posts]
 
 **_*id in URL is user id_**
 
@@ -466,7 +466,7 @@ Takes an object:
 
 ### Update a Post
 
-**PUT** to [/api/journal/posts/id](https://bw-one-line-a-day.herokuapp.com/api/auth/register)
+**PUT** to [https://backend-onelineaday.herokuapp.com/api/journal/posts/1]
 
 **_*id in URL is post id_**
 
@@ -498,7 +498,7 @@ Takes an object:
 
 ### DELETE a Post
 
-**DELETE** to [/api/journal/posts](https://bw-one-line-a-day.herokuapp.com/api/auth/register)/id
+**DELETE** to [https://backend-onelineaday.herokuapp.com/api/journal/posts/1]
 
 **_*id in URL is post id_**
 
