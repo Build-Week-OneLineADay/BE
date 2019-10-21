@@ -50,11 +50,11 @@ function findUserPostsByDate(id, date){
     .orderBy( 'posts.created_at' ); //order the posts by date posted
 }
 
-//add a journal entry: api/users/id/posts
+//add a journal entry: api/journal/users/id/posts
 function addJournalPost(id, post){
 
     return db('posts')
-    .insert(id, post) //tells postgres to return id with response
+    .insert(post, id) //tells postgres to return id with response
     .then( ([id]) => { //square brackets removes the array brackets from the response
         return findPostById(id);
     })
