@@ -1,3 +1,5 @@
+//import moment
+var moment = require('moment');
 
 exports.up = function(knex) {
 
@@ -30,13 +32,13 @@ exports.up = function(knex) {
         //primary key
         tbl.increments();
 
-        tbl.string('title', 255)
-        .notNullable();
+        tbl.string('title', 255);        
 
         tbl.text('text_entry')
-        .notNullable();
+        .notNullable();        
 
-        tbl.timestamp('created_at').defaultTo(knex.fn.now());
+        //tbl.date('created_at').defaultTo(knex.fn.now());
+        tbl.date('created_at').defaultTo(moment(new Date()).format("MM-DD-YYYY"));
         
         //tbl.datetime('created_at', { precision: 6 })
         //.defaultTo(knex.fn.now(6));
@@ -49,10 +51,7 @@ exports.up = function(knex) {
         .inTable('users')
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
-    });
-
-
-    
+    });    
 };
 
 exports.down = function(knex) {

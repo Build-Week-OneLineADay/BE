@@ -8,9 +8,10 @@ const db = require('../data/dbConfig.js');
 module.exports = {
     findAllUsers,
     findUserByEmail, //login
-    findUserById, //   
-    addUser, //register  
-    findUserJournalEntries
+    findUserById,    
+    addUser, //register 
+    updateUser,
+    removeUser
 
 };
 
@@ -40,9 +41,31 @@ function addUser({ first_name, last_name, email, password }){
     //'id' tells the db to return the id after insert. not necessary with sqlite3 but needed for postgres
     .insert(({ first_name, last_name, email, password }), 'id')
     .then ( ([id]) => {
-        return findById(id);
+        return findUserById(id);//finds the user with the id that was returned and returns the user object to front end
     })
 }
+
+function updateUser(id, changes){
+
+    return db('users')
+    .where('users.id', id)
+    .update(changes)
+    .then( count => {
+        return count > 0 ? findUserById(id) : null;   //must use return to return the newly updated record   
+    })
+}
+
+function removeUser(id){
+
+    return db('users')
+    .where('users.id', id)
+    .delete()
+    .then( count => {
+        return count > 0 ? count : null;    
+    })
+
+}
+
 
 
 

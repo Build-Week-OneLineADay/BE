@@ -1,9 +1,9 @@
-//create auth router
-const authRouter = express.Router();
-
 const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+
+//create auth router
+const authRouter = express.Router();
 
 //import data access file
 const authDB = require('../users/userModel.js');
@@ -13,7 +13,7 @@ const secrets = require ('../config/secrets.js');
 
 /**************************************endpoints beginning with /api/auth**************************************/
 //************api/auth/register
-authRouter.post('/register', (req, res) => {
+authRouter.post('/register', validateRegisterInfo, (req, res) => {
 
      //destructure the info received from req.body
      const { first_name, last_name, email, password } = req.body;
@@ -37,7 +37,7 @@ authRouter.post('/register', (req, res) => {
 })
 
 //***********api/auth/login
-authRouter.post('/login', (req, res) => {
+authRouter.post('/login', validateLoginInfo, (req, res) => {
 
     const { email, password } = req.body;    
 
@@ -56,7 +56,7 @@ authRouter.post('/login', (req, res) => {
                         id: user.id,
                         first_name: user.first_name,
                         last_name: user.last_name,
-                        email: user.username,
+                        email: user.email,
                         password: user.password                        
                 },
                 token,                  
@@ -99,6 +99,55 @@ function generateToken(user){
     return jwt.sign(payload, secrets.jwtSecret, options);
 
 }
+
+/******************************************custom/local middleware*************************************/
+function validateRegisterInfo(req, res, next){
+
+    const userObject = req.body;
+    const firstName = userObject.first_name;
+    const lastName = userObject.last_name;
+    const email = userObject.email;
+    const password = userObject.password;    
+
+    if(!userObject){
+        res.status(400).json( {message: 'Missing user data.'} );
+    }
+    else if(!firstName){
+        res.status(400).json( {message: 'Missing required first name.'} );
+    }
+    else if(!lastName){
+        res.status(400).json( {message: 'Missing required last name.'} );
+    }
+    else if(!email){
+        res.status(400).json( {message: 'Missing required email.'} );
+    }
+    else if(!password){
+        res.status(400).json( {message: 'Missing required password.'} );
+    }
+    else {
+        next();
+    }
+};
+
+function validateLoginInfo(req, res, next){
+
+    const loginObject = req.body;
+    const email = loginObject.email;
+    const password = loginObject.password;     
+
+    if(!loginObject){
+        res.status(400).json( {message: 'Missing user data.'} );
+    }
+    else if(!email){
+        res.status(400).json( {message: 'Missing required first name.'} );
+    }
+    else if(!password){
+        res.status(400).json( {message: 'Missing required last name.'} );
+    }    
+    else {
+        next();
+    }
+};
 
 //export router
 module.exports = authRouter;
