@@ -38,7 +38,7 @@ exports.up = function(knex) {
         .notNullable();        
 
         //tbl.date('created_at').defaultTo(knex.fn.now());
-        tbl.date('created_at').defaultTo(moment(new Date()).format("MM-DD-YYYY"));
+        tbl.datetime('created_at').defaultTo(moment(new Date()).format("MM-DD-YYYY"));
         
         //tbl.datetime('created_at', { precision: 6 })
         //.defaultTo(knex.fn.now(6));
