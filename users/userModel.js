@@ -9,9 +9,9 @@ module.exports = {
     findAllUsers,
     findUserByEmail, //login
     findUserById,    
-    addUser, //register 
+    addUser, //register
     updateUser,
-    removeUser
+    removeUser 
 };
 
 //define CRUD methods
