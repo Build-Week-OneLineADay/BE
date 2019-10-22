@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 module.exports = {
 
   development: {
@@ -19,14 +21,14 @@ module.exports = {
   testing: {
     client: 'sqlite3',
     connection: {
-      filename: './data/onelineaday-test.db3',
+      filename: './onelineaday-test.db3',
     },
     useNullAsDefault: true,
     migrations: {
-      directory: './data/migrations',
+      directory: './migrations',
     },
     seeds: {
-      directory: './data/seeds',
+      directory: './seeds',
     },
   },
   //needed when using foreign keys

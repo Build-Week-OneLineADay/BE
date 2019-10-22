@@ -12,7 +12,6 @@ module.exports = {
     addUser, //register 
     updateUser,
     removeUser
-
 };
 
 //define CRUD methods

@@ -139,10 +139,10 @@ function validateLoginInfo(req, res, next){
         res.status(400).json( {message: 'Missing user data.'} );
     }
     else if(!email){
-        res.status(400).json( {message: 'Missing required first name.'} );
+        res.status(400).json( {message: 'Missing required email.'} );
     }
     else if(!password){
-        res.status(400).json( {message: 'Missing required last name.'} );
+        res.status(400).json( {message: 'Missing required password.'} );
     }    
     else {
         next();

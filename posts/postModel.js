@@ -10,28 +10,29 @@ module.exports = {
     findPostById,
     findPostsByUserId,
     findUserPostsByDate,    
-    //findUserPostsTenYears,
     addJournalPost,
     updateJournalPost,
     removeJournalPost
 };
 
 //define CRUD methods
+//returns user id because user id is in the posts table
 function findAllPosts(){
 
     return db('posts');
 }
 
 //find a post by post id:api/journal/posts/:id
+//returns the user id because it is in the posts table
 function findPostById(id){
 
     return db('posts')
     .where({ 'posts.id': id})
     .first();
-
 }
 
 //return all user journal entries by user id:api/journal/users/:id/posts
+//this does not return the user id/excluded from select statement
 function findPostsByUserId(id){
     return db('posts')
     .join('users', 'posts.user_id', '=', 'users.id')   
@@ -46,15 +47,16 @@ function findUserPostsByDate(id, date){
     .join('users', 'posts.user_id', '=', 'users.id') 
     .where({ 'posts.user_id': id})  
     .where({ 'posts.created_at': date }) //where the user id in the posts table is equal to the id entered 
-    .select('posts.id as post_id', 'posts.title', 'posts.text_entry', 'posts.created_at', 'users.id as user_id')      
+    .select('posts.id', 'posts.title', 'posts.text_entry', 'posts.created_at')      
     .orderBy( 'posts.created_at' ); //order the posts by date posted
 }
 
 //add a journal entry: api/journal/users/id/posts
+//returns user id with post because user id is in the posts table
 function addJournalPost(id, post){
 
     return db('posts')
-    .insert(post, id) //tells postgres to return id with response
+    .insert(post, 'id') //tells postgres to return id with response
     .then( ([id]) => { //square brackets removes the array brackets from the response
         return findPostById(id);
     })
@@ -66,12 +68,17 @@ function addJournalPost(id, post){
 //update a journal entry: api/journal/posts/id
 function updateJournalPost(id, changes){
 
+    console.log("changes object", changes);
+
     return db('posts')
     .where('posts.id', id)//where the id in the posts table is equal to the id parameter
     .update(changes)
     .then( count => {
         return count > 0 ? findPostById(id) : null;   //return the newly updated record   
     })
+    .catch(error => {
+        console.log("post update error", error);
+    })  
 }
 
 //remove a journal entry: api/journal/posts/id
