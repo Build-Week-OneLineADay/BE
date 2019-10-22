@@ -201,27 +201,21 @@ function validateUserId(req, res, next){
 //validates date format
 function validatePostDateFormat(req, res, next){
 
-    const postDate = req.params.date;
+    const postDate = req.params.date;    
 
-    //let dateEntered = moment(postDate);
-
-    if (!moment(postDate,'MM-DD-YYYY').isValid()) {
-        res.status(404).json( {message: 'Date must be in the format MM-DD-YYYY.'} );
+    //use moment's isValid function to check if date is in correct format
+    let momentDate = moment(postDate , "MM-DD-YYYY", true);
+    
+    if (momentDate.isValid()) {
+       
+        next();
     } 
     else {
-        next();
+        res.status(404).json( {message: 'Date must be in the format MM-DD-YYYY.'} );
+        
     }
-
-    /*if(postDate.isValid()){
-        next();
-    }
-    else {
-        res.status(404).json( {message: 'Date must be in the format YYYY-MM-DD.'} );
-    }*/
-
+    
 };
-
-
 
 function validatePostInfo(req, res, next){
     
