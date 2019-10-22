@@ -7,7 +7,7 @@ var moment = require('moment');
 //import data access file
 const postDB = require('./postModel.js');
 
-//import data access file
+//import data access file 
 const userDB = require('../users/userModel.js');
 
 const authenticate = require('../auth/authMiddleware.js');
@@ -72,14 +72,14 @@ postRouter.get('/users/:id/posts', validateUserId, (req, res) => {
 })
 
 //return user posts by date: api/journal/users/id/posts/date
-postRouter.get('/users/:id/posts/:date', validateUserId, validatePostDate, (req, res) => {
+postRouter.get('/users/:id/posts/:date', validateUserId, validatePostDateFormat, (req, res) => {
 
     const id = req.params.id;
     const date = req.params.date;    
   
     postDB.findUserPostsByDate(id, date)
     .then(posts => {
-      if (posts) {
+      if (posts.length > 0) {
          res.status(200).json(posts);
       }
       else {
@@ -91,8 +91,8 @@ postRouter.get('/users/:id/posts/:date', validateUserId, validatePostDate, (req,
     });
 })
 
-//return user posts by date: api/journal/users/id/tenyear/date
-postRouter.get('/users/:id/tenyear/:date', validateUserId, validatePostDate, (req, res) => {
+//return user posts by tenyear date: api/journal/users/id/tenyear/date
+/*postRouter.get('/users/:id/tenyear/:date', validateUserId, validatePostDate, (req, res) => {
 
     const id = req.params.id;
     const date = req.params.date;    
@@ -109,7 +109,7 @@ postRouter.get('/users/:id/tenyear/:date', validateUserId, validatePostDate, (re
     .catch (err => {
       res.status(500).json({ message: 'There was an error retrieving posts for that date.' });
     });
-})
+})*/
 
 //add a journal entry: api/journal/users/id/posts
 postRouter.post('/users/:id/posts', validateUserId, validatePostInfo, (req, res) => {
@@ -130,10 +130,12 @@ postRouter.post('/users/:id/posts', validateUserId, validatePostInfo, (req, res)
 })
 
 //update a journal entry: api/journal/posts/id
-postRouter.put('/posts/:id', validatePostId, validatePostInfo, (req, res) => {
+postRouter.put('/posts/:id', validatePostId, (req, res) => {
 
     const { id } = req.params;
     const changes = req.body;
+
+    console.log("changes object in post router", req.body);
     
     postDB.updateJournalPost(id, changes)
     .then(updatedPost => {
@@ -194,8 +196,10 @@ function validateUserId(req, res, next){
     })
 };
 
+
+
 //validates date format
-function validatePostDate(req, res, next){
+function validatePostDateFormat(req, res, next){
 
     const postDate = req.params.date;
 
@@ -217,6 +221,8 @@ function validatePostDate(req, res, next){
 
 };
 
+
+
 function validatePostInfo(req, res, next){
     
     const postObject = req.body;
@@ -237,4 +243,4 @@ function validatePostInfo(req, res, next){
     }
 };
 
-  module.exports = postRouter;
+module.exports = postRouter;
