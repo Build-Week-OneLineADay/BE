@@ -28,7 +28,7 @@ describe('removeJournalPost()', () => {
     })
 
     //*****************TEST ONE: ADD POST**************************/
-    it('should insert the provided post into the database', async () => {
+    it('should insert the provided post into the database (add & delete)', async () => {
 
         //create a new post object with the details to pass to the updatePost method
         let postToAdd =  { 
@@ -51,7 +51,7 @@ describe('removeJournalPost()', () => {
     //*****************TEST TWO:DELETE POST**************************/ 
     //there should be only one post in the database after the beforeEach() and insert above
     //therefore remove the user with 1 as their id   
-    it('should remove the provided post from the db', async () => {
+    it('should remove the provided post from the db (add & delete)', async () => {
         let post = await PostModel.removeJournalPost(1);   
 
     //select all records from the posts table and assign the results to postmodel
