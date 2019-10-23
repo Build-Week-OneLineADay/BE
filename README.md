@@ -24,22 +24,22 @@
 
 # Endpoints Summary
 
-| Methods 	| Endpoints                         	| Description                                      	|
-|---------	|----------------------------------	|--------------------------------------------------	|
-| POST    	| /api/auth/register               	| registers a new user                             	|
-| POST    	| /api/auth/login                  	| logs in a user                                   	|
-| GET     	| /api/users                       	| returns all users                                	|
-| GET     	| /api/users/id                    	| returns a user by user id                        	|
-| PUT     	| /api/users/id                    	| updates a user                                   	|
-| DELETE  	| api/users/id                     	| deletes a user                                   	|
-| GET     	| /api/journal/posts               	| returns all journal entries/posts                	|
-| GET     	| /api/journal/users/id/posts      	| returns a journal entry/post by user id          	|
-| GET     	| /api/journal/posts/id            	| returns a journal entry/post by post id          	|
-| GET     	| /api/journal/users/id/posts/date 	| returns a journal entry/post by user id and date 	|
-| POST    	| /api/journal/users/id/posts      	| creates a journal entry/post                     	|
-| PUT     	| /api/journal/posts/id            	| updates a journal entry/post                     	|
-| DELETE  	| /api/journal/posts/id            	| deletes a journal entry/post                     	|
-
+| Methods 	| Endpoints                                	| Description                                           	|
+|---------	|-----------------------------------------	|-------------------------------------------------------	|
+| POST    	| /api/auth/register                      	| registers a new user                                  	|
+| POST    	| /api/auth/login                         	| logs in a user                                        	|
+| GET     	| /api/users                              	| returns all users                                     	|
+| GET     	| /api/users/id                           	| returns a user by user id                             	|
+| PUT     	| /api/users/id                           	| updates a user                                        	|
+| DELETE  	| api/users/id                            	| deletes a user                                        	|
+| GET     	| /api/journal/posts                      	| returns all journal entries/posts                     	|
+| GET     	| /api/journal/users/id/posts             	| returns a journal entry/post by user id               	|
+| GET     	| /api/journal/posts/id                   	| returns a journal entry/post by post id               	|
+| GET     	| /api/journal/users/id/search/searchtext 	| returns a journal entry/post that matches search text 	|
+| GET     	| /api/journal/users/id/posts/date        	| returns a journal entry/post by user id and date      	|
+| POST    	| /api/journal/users/id/posts             	| creates a journal entry/post                          	|
+| PUT     	| /api/journal/posts/id                   	| updates a journal entry/post                          	|
+| DELETE  	| /api/journal/posts/id                   	| deletes a journal entry/post                          	|
 
 
 # ENDPOINTS DESCRIPTION
@@ -389,6 +389,46 @@ Takes an object:
     "created_at": "10-20-2019"
 
 }
+
+### GET a Post by User Id & Search Query
+
+**GET** to [https://backend-onelineaday.herokuapp.com/api/journal/users/1/search/{searchtext}]
+
+**_*id in URL is user id_**
+
+**Returns**: an array of post objects
+
+[
+
+    {
+
+    "post_id": 11,
+
+    "title": "halloween",
+
+    "text_entry": "lorem ipsum",
+
+    "created_at": "10-20-2019",
+
+    "user_id": 6
+
+    },
+    {
+
+    "post_id": 12,
+
+    "title": "thanksgiving",
+
+    "text_entry": "lorem ipsum",
+
+    "created_at": "10-20-2019",
+
+    "user_id": 6
+
+    }
+
+]
+
 
 ### GET a Post by User Id & Post Date
 
