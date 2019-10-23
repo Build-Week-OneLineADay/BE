@@ -6,12 +6,13 @@ const db = require('../data/dbConfig.js');
 
 //export functions
 module.exports = {
-    findAllPosts,
+    findAllPosts, 
     findPostById,
-    findPostsByUserId,
-    findUserPostsByDate,    
-    addJournalPost,
-    updateJournalPost,
+    findPostsByUserId, 
+    findUserPostsByDate,
+    findPostByTextEntry,    
+    addJournalPost, 
+    updateJournalPost, 
     removeJournalPost
 };
 
@@ -51,9 +52,19 @@ function findUserPostsByDate(id, date){
     .orderBy( 'posts.created_at' ); //order the posts by date posted
 }
 
+//return all user journal entry posts by text entry
+function findPostByTextEntry(id, searchtext){
+    return db('posts')
+    .join('users', 'posts.user_id', '=', 'users.id') 
+    .where({ 'posts.user_id': id})      
+    .select('posts.id', 'posts.title', 'posts.text_entry', 'posts.created_at')  
+    .where( 'posts.text_entry', 'like', `%${searchtext}%` )     
+    .orderBy( 'posts.created_at' ); //order the posts by date posted
+}
+
 //add a journal entry: api/journal/users/id/posts
 //returns user id with post because user id is in the posts table
-function addJournalPost(id, post){
+function addJournalPost(post){
 
     return db('posts')
     .insert(post, 'id') //tells postgres to return id with response

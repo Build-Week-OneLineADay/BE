@@ -91,6 +91,26 @@ postRouter.get('/users/:id/posts/:date', validateUserId, validatePostDateFormat,
     });
 })
 
+//return user posts by search text: api/journal/users/id/search/searchtext
+postRouter.get('/users/:id/search/:searchtext', validateUserId, (req, res) => {
+
+    const id = req.params.id;
+    const searchtext = req.params.searchtext;    
+  
+    postDB.findPostByTextEntry(id, searchtext)
+    .then(posts => {
+      if (posts.length > 0) {
+         res.status(200).json(posts);
+      }
+      else {
+        res.status(404).json({ message: 'There are no posts matching your search query.' });
+      }
+    })
+    .catch (err => {
+      res.status(500).json({ message: 'There was an error retrieving posts for that search.' });
+    });
+})
+
 //return user posts by tenyear date: api/journal/users/id/tenyear/date
 /*postRouter.get('/users/:id/tenyear/:date', validateUserId, validatePostDate, (req, res) => {
 
@@ -119,7 +139,7 @@ postRouter.post('/users/:id/posts', validateUserId, validatePostInfo, (req, res)
 
     post.user_id = id; //assign the id in parameter to the user_id foreign key for the post
     
-    postDB.addJournalPost(id, post)
+    postDB.addJournalPost(post)
     .then(post => {
         res.status(200).json(post);
     })
