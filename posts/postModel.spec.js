@@ -7,7 +7,7 @@ describe('posts model', () => {
 
     //there is a beforeEach(), beforeAll(), afterEach(), and afterAll()
 
-    //clean out users table before each test runs
+    //clean out posts table before each test runs
     beforeEach(async () => {
         await db('posts').truncate();
     })
@@ -19,153 +19,153 @@ describe('posts model', () => {
    
 });
 
-//***************************************TESTING DELETE****************************************
-describe('removeUser()', () => {   
+//***************************************TESTING ADD & DELETE****************************************
+describe('removeJournalPost()', () => {   
     
-    //clean out users table before delete tests run
+    //clean out posts table before delete tests run
     beforeEach(async () => {
-        await db('users').truncate();
+        await db('posts').truncate();
     })
 
-    //*****************TEST ONE**************************/
-    it('should insert the provided user into the database (delete)', async () => {
+    //*****************TEST ONE: ADD POST**************************/
+    it('should insert the provided post into the database', async () => {
+
+        //create a new post object with the details to pass to the updatePost method
+        let postToAdd =  { 
+            title: 'test post title', 
+            text_entry: 'test post text',
+            created_at: '10-10-2010',
+            user_id: 1            
+        };
+        
         //first insert a record
-        await UserModel.addUser({ 
-                first_name: 'Tisha', 
-                last_name: 'Holder', 
-                email: 'tisha@yahoo.com',                  
-                password: 'test' 
-        });
+        await PostModel.addJournalPost(postToAdd);
 
         //select all records from the users table and assign the results to usermodel
-        let usermodel = await db('users');
+        let postModel = await db('posts');
 
          //assert the record was inserted
-         expect(usermodel).toHaveLength(1);
+         expect(postModel).toHaveLength(1);
     })
 
+    //*****************TEST TWO:DELETE POST**************************/ 
+    //there should be only one post in the database after the beforeEach() and insert above
+    //therefore remove the user with 1 as their id   
+    it('should remove the provided post from the db', async () => {
+        let post = await PostModel.removeJournalPost(1);   
 
-        //*****************TEST TWO**************************/ 
-        //there should be only one user in the database after the beforeEach() and insert above
-        //therefore remove the user with 1 as their id   
-        it('should remove the provided user from the db', async () => {
-            let user = await UserModel.removeUser({ id: 1 });   
+    //select all records from the posts table and assign the results to postmodel
+    let postmodel = await db('posts');
 
-        //select all records from the users table and assign the results to usermodel
-        let usermodel = await db('users');
-
-        //assert the record was deleted
-        //after deleting the user record there should be no records left in the users table
-        //therefore the length should be zero(0)
-        expect(usermodel).toHaveLength(0); 
-    
+    //assert the record was deleted
+    //after deleting the post record there should be no records left in the posts table
+    //therefore the length should be zero(0)
+    expect(postmodel).toHaveLength(0);    
 
     })
 
-});
-
-//**************************************TESTING REGISTER*******************************/
-describe('addUser()', () => {
-
-    //clean out users table before delete tests run
-    beforeEach(async () => {
-        await db('users').truncate();
-    })
-
-    //*****************TEST ONE**************************/
-    it('should insert/register users into the database', async () => {
-        //insert a record
-        await UserModel.addUser({ 
-                first_name: 'Tisha', 
-                last_name: 'Holder', 
-                email: 'tisha2@yahoo.com',                 
-                password: 'test' 
-        });
-
-        //select all records from the users table and assign the results to usermodel
-        let usermodel = await db('users');
-
-         //assert the record was inserted and the returned array has a length = 1
-         expect(usermodel).toHaveLength(1);
-    });
-
-    //*****************TEST TWO**************************/
-    // note we're checking one user at a time
-    it('should insert the provided user into the db', async () => {
-        let user = await UserModel.addUser({ 
-            first_name: 'Eric', 
-            last_name: 'Holder', 
-            email: 'eric@yahoo.com',            
-            password: 'test' 
-        });    
-
-        expect(user.first_name).toBe('Eric');
-  
-        //note how we're reusing the user variable
-         user = await UserModel.addUser({ 
-             first_name: 'Pam', 
-             last_name: 'Holder', 
-             email: 'pam@yahoo.com',            
-             password: 'test' 
-         });
- 
-         expect(user.first_name).toBe('Pam');         
- 
-     });
-
-    
 });
 
 //**************************************TESTING UPDATE*******************************/
-describe('updateUser()', () => {
+describe('updateJournalPost()', () => {
 
     //clean out users table before delete tests run
     beforeEach(async () => {
-        await db('users').truncate();
+        await db('posts').truncate();
     })
 
-    //*****************TEST ONE**************************/
-    it('should insert/register users into the database (update)', async () => {
-        //insert two records in the database. will update one of them.
-        await UserModel.addUser({ 
-                first_name: 'Tisha', 
-                last_name: 'Holder', 
-                email: 'tisha@yahoo.com',                 
-                password: 'test' 
-        });
+    //*****************TEST ONE: ADD POST**************************/
+    it('should insert the provided post into the database', async () => {
 
-        await UserModel.addUser({ 
-            first_name: 'Tisha Updated', 
-            last_name: 'Holder Udated', 
-            email: 'tisha2@yahoo.com',                 
-            password: 'test' 
-        });
+        //create a new post object with the details to pass to the updatePost method
+        let postToAdd =  { 
+            title: 'test post title', 
+            text_entry: 'test post text',
+            user_id: 1            
+        };
+
+        //first insert a record
+        await PostModel.addJournalPost(postToAdd);
 
         //select all records from the users table and assign the results to usermodel
-        let usermodel = await db('users');
+        let postModel = await db('posts');
 
-         //assert the record was inserted and the returned array has a length = 1
-         expect(usermodel).toHaveLength(2);         
+         //assert the record was inserted
+         expect(postModel).toHaveLength(1);    
    
 
        //*****************TEST TWO**************************/    
 
-       //create a new user object with the details to pass to the updateUser method
-        let userToUpdate =  { 
-            first_name: 'Tisha Updated 2', 
-            last_name: 'Holder Udated 2', 
-            email: 'tisha22@yahoo.com',                 
-            password: 'test' 
-        };
+       //create a new user object with the details to pass to the updateJournalPost method
+       let postToUpdate =  { 
+        title: 'updated title', 
+        text_entry: 'updated text',
+        user_id: 1            
+       };
         
         //stores the user record after it is updated into updatedUser
-        let updatedUser = await UserModel.updateUser(2, userToUpdate);
+        let updatedPost = await PostModel.updateJournalPost(1, postToUpdate);
         
 
         //tests if the user was updated by checking if the first name changed
-        expect(updatedUser.first_name).toBe('Tisha Updated 2');
+        expect(updatedPost.title).toBe('updated title');
  
      })
  
 });
+
+//***************************************TESTING ADD & READ(findAllPosts)*******************************
+describe('findAllJournalPosts()', () => {   
+    
+    //clean out posts table before delete tests run
+    beforeEach(async () => {
+        await db('posts').truncate();
+    })
+
+    //*****************TEST ONE: ADD POST**************************/
+    it('should insert the provided post into the database (add & read)', async () => {
+
+        //create a new post object with the details to pass to the updatePost method
+        let postToAdd1 =  { 
+            title: 'test post title', 
+            text_entry: 'test post text',
+            created_at: '10-10-2010',
+            user_id: 1            
+        };
+
+        //create a new post object with the details to pass to the updatePost method
+        let postToAdd2 =  { 
+            title: 'test post title2', 
+            text_entry: 'test post text2',
+            created_at: '10-10-2011',
+            user_id: 1            
+        };
+        
+        //first insert a record
+        await PostModel.addJournalPost(postToAdd1);
+        await PostModel.addJournalPost(postToAdd2);
+
+        //select all records from the users table and assign the results to usermodel
+        //let postModel = await db('posts');
+
+        let postmodel = await PostModel.findAllPosts();
+
+         //assert the record was inserted
+         expect(postmodel).toHaveLength(2);
+
+         //stores the user record after it is updated into updatedUser
+        //let updatedPost = await PostModel.updateJournalPost(1, postToUpdate);
+        
+
+        //tests if the user was updated by checking if the first name changed
+        //expect(updatedPost.title).toBe('updated title');
+    })
+
+    
+
+});
+
+
+
+
 

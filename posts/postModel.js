@@ -6,13 +6,13 @@ const db = require('../data/dbConfig.js');
 
 //export functions
 module.exports = {
-    findAllPosts,
+    findAllPosts, //-------------to test
     findPostById,
-    findPostsByUserId,
+    findPostsByUserId, 
     findUserPostsByDate,    
-    addJournalPost,
-    updateJournalPost,
-    removeJournalPost
+    addJournalPost, //tested
+    updateJournalPost, //tested
+    removeJournalPost //tested
 };
 
 //define CRUD methods
@@ -53,7 +53,7 @@ function findUserPostsByDate(id, date){
 
 //add a journal entry: api/journal/users/id/posts
 //returns user id with post because user id is in the posts table
-function addJournalPost(id, post){
+function addJournalPost(post){
 
     return db('posts')
     .insert(post, 'id') //tells postgres to return id with response

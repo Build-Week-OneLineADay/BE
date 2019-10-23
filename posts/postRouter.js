@@ -119,7 +119,7 @@ postRouter.post('/users/:id/posts', validateUserId, validatePostInfo, (req, res)
 
     post.user_id = id; //assign the id in parameter to the user_id foreign key for the post
     
-    postDB.addJournalPost(id, post)
+    postDB.addJournalPost(post)
     .then(post => {
         res.status(200).json(post);
     })
