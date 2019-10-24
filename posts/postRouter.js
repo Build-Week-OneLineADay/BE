@@ -218,7 +218,6 @@ function validateUserId(req, res, next){
 };
 
 
-
 //validates date format
 function validatePostDateFormat(req, res, next){
 
