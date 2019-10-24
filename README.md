@@ -1,3 +1,21 @@
+# Built With
+
+Node.js - is an open-source, cross-platform, JavaScript runtime environment that executes JavaScript code outside of a browser
+
+Express.js - Lightweight web framework to bootstrap Node.js APIs
+
+PostgreSQL - An object-relational database management system
+
+SQLite - A lightweight software library that provides a relational database management system
+
+Knex.js - a JavaScript query builder for relational databases including PostgreSQL, MySQL, SQLite3, and Oracle
+
+JWT - JSON Web Token defines a compact and self-contained way to securely transmit information between parties as a JSON object
+
+Supertest - A library made specifically for testing nodejs http servers
+
+JEST - A JavaScript testing library
+
 
 # Users Schema
 
