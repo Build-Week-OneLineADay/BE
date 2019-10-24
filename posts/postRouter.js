@@ -141,6 +141,7 @@ postRouter.post('/users/:id/posts', validateUserId, validatePostInfo, (req, res)
     
     postDB.addJournalPost(post)
     .then(post => {
+        console.log("added post", post);
         res.status(200).json(post);
     })
     .catch(error => {
