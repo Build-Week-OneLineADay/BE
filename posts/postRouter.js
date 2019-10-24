@@ -58,7 +58,7 @@ postRouter.get('/users/:id/posts', validateUserId, (req, res) => {
 
     postDB.findPostsByUserId(id)
     .then(posts => {  
-        if(posts){      
+        if(posts.length > 0){      
             res.status(200).json(posts);   
         }
         else{
@@ -151,7 +151,7 @@ postRouter.post('/users/:id/posts', validateUserId, validatePostInfo, (req, res)
 })
 
 //update a journal entry: api/journal/posts/id
-postRouter.put('/posts/:id', validatePostId, (req, res) => {
+postRouter.put('/posts/:id', validatePostId, validatePostInfo, (req, res) => {
 
     const { id } = req.params;
     const changes = req.body;
