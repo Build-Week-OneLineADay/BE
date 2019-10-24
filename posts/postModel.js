@@ -105,24 +105,6 @@ function removeJournalPost(id){
 }
 
 
-//get current date
-//select all from the posts table where the month and day is the same for that user
-//for ten years
-
-//return all user journal entries post date:api/journal/users/:id/tenyear/:date (YYYY-MM-DD)
-/*function findUserPostsTenYears(id, date){
-
-    return db('posts')
-    .join('users', 'posts.user_id', '=', 'users.id')    
-    .where({ 'posts.user_id': id }) //where the user id in the posts table is equal to the id entered    
-    .where({ 'posts.created_at': date }) //where the user id in the posts table is equal to the id entered
-    .andWhereRaw(`strftime('%m', date) = ?`, datePart(month, date))
-    .andWhereRaw(`strftime('%d', date) = ?`, datePart(day, date))    
-    .select('posts.id', 'posts.title', 'posts.text_entry', 'posts.created_at')      
-    .where(DATEADD(year, -10, date ))   
-    .orderBy( 'posts.created_at' ) //order the posts by date posted   
-   
-}*/
 
 
 
