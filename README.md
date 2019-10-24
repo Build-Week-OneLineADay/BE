@@ -16,6 +16,14 @@ Supertest - A library made specifically for testing nodejs http servers
 
 JEST - A JavaScript testing library
 
+# Yarn Scripts
+
+yarn install: installs project dependencies.
+
+yarn run server: starts the development server in watch mode on port 4000.
+
+yarn test: runs all the test suites and displays test coverage.
+
 
 # Users Schema
 
