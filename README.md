@@ -178,7 +178,7 @@ Takes an object:
 
 ### GET a User By User Id
 
-**GET** to [https://backend-onelineaday.herokuapp.com/api/users/{user id}]
+**GET** to [https://backend-onelineaday.herokuapp.com/api/users/{userid}]
 
 **_*id in URL is user id_**
 
@@ -200,7 +200,7 @@ Takes an object:
 
 ### Update an Existing User
 
-**PUT** to [https://backend-onelineaday.herokuapp.com/api/users/{user id}]
+**PUT** to [https://backend-onelineaday.herokuapp.com/api/users/{userid}]
 
 **_*id in URL is user id_**
 
@@ -236,7 +236,7 @@ Takes an object:
 
 ### DELETE a User
 
-**DELETE** to [https://backend-onelineaday.herokuapp.com/api/users/{user id}]
+**DELETE** to [https://backend-onelineaday.herokuapp.com/api/users/{userid}]
 
 **_*id in URL is user id_**
 
@@ -336,7 +336,7 @@ Takes an object:
 
 ### GET a User’s Posts by User Id
 
-**GET** to [https://backend-onelineaday.herokuapp.com/api/journal/users/{user id}/posts]
+**GET** to [https://backend-onelineaday.herokuapp.com/api/journal/users/{userid}/posts]
 
 **_*id in URL is user id_**
 
@@ -372,7 +372,7 @@ Takes an object:
 
 ### GET a Post by Post Id
 
-**GET** to [https://backend-onelineaday.herokuapp.com/api/journal/posts/{post id}]
+**GET** to [https://backend-onelineaday.herokuapp.com/api/journal/posts/{postid}]
 
 **_*id in URL is post id_**
 
@@ -392,7 +392,7 @@ Takes an object:
 
 ### GET a Post by User Id & Search Query
 
-**GET** to [https://backend-onelineaday.herokuapp.com/api/journal/users/{user id}/search/{searchtext}]
+**GET** to [https://backend-onelineaday.herokuapp.com/api/journal/users/{userid}/search/{searchtext}]
 
 **_*id in URL is user id_**
 
@@ -432,7 +432,7 @@ Takes an object:
 
 ### GET a Post by User Id & Post Date
 
-**GET** to [https://backend-onelineaday.herokuapp.com/api/journal/users/{user id}/posts/{10-21-2019}]
+**GET** to [https://backend-onelineaday.herokuapp.com/api/journal/users/{userid}/posts/{10-21-2019}]
 
 **_*id in URL is user id_**
 
@@ -476,7 +476,7 @@ Takes an object:
 
 ### Create a New Journal Entry/Post
 
-**POST** to [https://backend-onelineaday.herokuapp.com/api/journal/users/{user id}/posts]
+**POST** to [https://backend-onelineaday.herokuapp.com/api/journal/users/{userid}/posts]
 
 **_*id in URL is user id_**
 
@@ -506,7 +506,7 @@ Takes an object:
 
 ### Update a Post
 
-**PUT** to [https://backend-onelineaday.herokuapp.com/api/journal/posts/{post id}]
+**PUT** to [https://backend-onelineaday.herokuapp.com/api/journal/posts/{postid}]
 
 **_*id in URL is post id_**
 
@@ -538,7 +538,7 @@ Takes an object:
 
 ### DELETE a Post
 
-**DELETE** to [https://backend-onelineaday.herokuapp.com/api/journal/posts/{post id}]
+**DELETE** to [https://backend-onelineaday.herokuapp.com/api/journal/posts/{postid}]
 
 **_*id in URL is post id_**
 
