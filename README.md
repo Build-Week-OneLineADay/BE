@@ -61,7 +61,7 @@ yarn test: runs all the test suites and displays test coverage.
 | GET     	| /api/journal/posts                      	| returns all journal entries/posts                     	|
 | GET     	| /api/journal/users/id/posts             	| returns a journal entry/post by user id               	|
 | GET     	| /api/journal/posts/id                   	| returns a journal entry/post by post id               	|
-| GET     	| /api/journal/users/id/search/searchtext 	| returns a journal entry/post that matches search text 	|
+| GET     	| /api/journal/users/id/search/searchtext 	| returns a journal entry/post that matches the search text 	|
 | GET     	| /api/journal/users/id/posts/date        	| returns a journal entry/post by user id and date      	|
 | POST    	| /api/journal/users/id/posts             	| creates a journal entry/post                          	|
 | PUT     	| /api/journal/posts/id                   	| updates a journal entry/post                          	|
