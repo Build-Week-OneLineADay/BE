@@ -135,11 +135,13 @@ postRouter.get('/users/:id/search/:searchtext', validateUserId, (req, res) => {
 postRouter.post('/users/:id/posts', validateUserId, validatePostInfo, (req, res) => {
 
     const { id } = req.params;
-    const post = req.body;
+    //const post = req.body;
 
-    post.user_id = id; //assign the id in parameter to the user_id foreign key for the post
+    const {title, text_entry} = req.body;
+
+    //post.user_id = id; //assign the id in parameter to the user_id foreign key for the post
     
-    postDB.addJournalPost(post)
+    postDB.addJournalPost({title, text_entry, user_id: id, created_at: moment().format('MM-DD-YYYY')})
     .then(post => {
         console.log("added post", post);
         res.status(200).json(post);

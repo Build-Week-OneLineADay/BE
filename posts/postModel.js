@@ -64,10 +64,10 @@ function findPostByTextEntry(id, searchtext){
 
 //add a journal entry: api/journal/users/id/posts
 //returns user id with post because user id is in the posts table
-function addJournalPost(post){
+function addJournalPost({title, text_entry, user_id, created_at}){
 
     return db('posts')
-    .insert(post, 'id') //tells postgres to return id with response
+    .insert({title, text_entry, user_id, created_at}, 'id') //tells postgres to return id with response
     .then( ([id]) => { //square brackets removes the array brackets from the response
         return findPostById(id);
     })
