@@ -37,11 +37,14 @@ exports.up = function(knex) {
         tbl.text('text_entry')
         .notNullable();        
 
-        //tbl.date('created_at').defaultTo(knex.fn.now());   
+        tbl.date('created_at').defaultTo(knex.fn.now());  //displays date in yyyy-mm-dd hh:mm:ss format 
         
-        tbl.datetime('created_at').defaultTo(knex.fn.now('now()'));
+        //tbl.datetime('created_at').defaultTo(knex.fn.now('now()'));
 
-        //tbl.datetime('created_at').defaultTo(moment(knex.fn.now('now()')).format("MM-DD-YYYY"));    
+        //formats date in MM-DD-YYYY format
+        //tbl.string('created_at').defaultTo(moment(knex.fn.now()).format("MM-DD-YYYY"));    
+
+       
 
         //foreign key
         tbl.integer('user_id')
