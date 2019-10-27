@@ -10,15 +10,13 @@ const postDB = require('./postModel.js');
 //import data access file 
 const userDB = require('../users/userModel.js');
 
-const authenticate = require('../auth/authMiddleware.js');
-
 //create router
 const postRouter = express.Router();
 
 /**************************************endpoints beginning with /api/journal**************************************/
 
 //returns all posts: api/journal/posts
-postRouter.get('/posts', authenticate, (req, res) => {
+postRouter.get('/posts', (req, res) => {
 
     postDB.findAllPosts()
     .then(posts => { 
