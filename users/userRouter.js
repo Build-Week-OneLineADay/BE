@@ -11,7 +11,7 @@ const authenticate = require('../auth/authMiddleware.js');
 
 /**************************************endpoints beginning with /api/users**************************************/
 //returns all users: api/users
-userRouter.get('/', authenticate, (req, res) => {
+userRouter.get('/', (req, res) => {
 
     userDB.findAllUsers()
     .then(users => { 
