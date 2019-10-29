@@ -90,19 +90,29 @@ Takes an object:
 
 }
 
-**Returns**: the created user object included hashed password
+**Returns**: an object with a welcome message, a user object, and the authorization token
 
 {
 
-    "id": 9,
+    "message": "Welcome John Doe!",
 
-    "first_name": "John",
+    "user":
 
-    "last_name": "Doe",
+    {
 
-    "email": "johndoe@yahoo.com",
+        "id": 8,
 
-    "password": "$2b$08$CT0itmYRB8SIJxIyDf.She1qGx0kgSbQRb36tSyc99zkb5A.KkyxS"
+        "first_name": "new user",
+
+        "last_name": "new user",
+
+        "email": "johndoe@yahoo.com",
+
+        "password": $2b$08$vkciRT2GRxdDFBgf3VLbMO7oz4loOY1uzyRBDyErulbGdr0BRuPZm"
+
+    },
+
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5ld3VzZXIxQHlhaG9vLmIsImlkIjo4LCJp0.O1rXq"
 
 }
 
