@@ -27,7 +27,21 @@ authRouter.post('/register', validateRegisterInfo, (req, res) => {
      .then(user => {
 
         //send a token when the user registers so they can log in automatically
-        res.status(200).json(user);
+        //generate token after a successful log in
+        const token = generateToken(user);
+            
+        //pass token along with response body
+        res.status(200).json({ 
+            message: `Welcome ${first_name}!`, 
+             user : {
+                    id: user.id,
+                    first_name: user.first_name,
+                    last_name: user.last_name,
+                    email: user.email,
+                    password: user.password                        
+            },
+            token,                  
+         });
      })
      .catch(error => {
          console.log("registration error", error);
